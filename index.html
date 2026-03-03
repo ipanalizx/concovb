@@ -2,124 +2,139 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>CraftHosting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Film & Dizi Önerileri</title>
 
 <style>
-html {
-    scroll-behavior: smooth;
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0d1117;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    background-size: 400% 400%;
-    animation: bgMove 10s ease infinite;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
+.container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    width:90%;
 }
 
-.container {
-    margin-top: 80px;
-    animation: fadeIn 1.5s ease;
+.card{
+    background:#161b22;
+    border-radius:12px;
+    overflow:hidden;
+    transition:0.3s;
+    position:relative;
 }
 
-.baslik {
-    font-size: 42px;
-    margin-bottom: 20px;
-    animation: slideDown 1.5s ease;
+.card:hover{
+    transform:scale(1.05);
+    background:#21262d;
 }
 
-.aciklama {
-    font-size: 18px;
-    margin-bottom: 30px;
-    animation: fadeIn 2s ease;
+label{
+    display:block;
+    padding:20px;
+    font-size:20px;
+    cursor:pointer;
+    text-align:center;
 }
 
-.buton {
-    text-decoration: none;
-    color: white;
-    background: #00aaff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    transition: 0.3s;
-    display: inline-block;
+input{
+    display:none;
 }
 
-.buton:hover {
-    background: #0088cc;
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #00aaff;
+.content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease, padding 0.5s ease;
+    background:#0d1117;
 }
 
-.kart {
-    background: rgba(0,0,0,0.4);
-    width: 60%;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 12px;
-    transition: 0.4s;
-    animation: slideUp 1.5s ease;
+input:checked ~ .content{
+    max-height:200px;
+    padding:15px;
 }
 
-.kart:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+.content p{
+    margin:8px 0;
+    opacity:0;
+    transform:translateY(-10px);
+    animation:fade 0.5s forwards;
 }
 
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-60px); }
-    to { opacity: 1; transform: translateY(0); }
+input:checked ~ .content p{
+    animation:fade 0.5s forwards;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(60px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fade{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@media(max-width:900px){
+    .container{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@media(max-width:500px){
+    .container{
+        grid-template-columns:1fr;
+    }
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1 class="baslik">CraftHosting</h1>
-
-    <p class="aciklama">
-        Bu bir bilgilendirme sitesidir. Siteye aşağıdaki linkten ulaşabilirsiniz.
-    </p>
-
-    <a href="https://client.crafthosting.com.tr/market" target="_blank" class="buton">
-        Siteye Git
-    </a>
-
-    <div class="kart">
-        <h2>Hızlı ve Güvenli</h2>
-        <p>
-            Serverlerimiz her zaman hızlı ve güvenlidir.
-            Tamamen DDOS koruması bulunmaktadır.
-        </p>
+    <div class="card">
+        <input type="checkbox" id="aksiyon">
+        <label for="aksiyon">💥 Aksiyon</label>
+        <div class="content">
+            <p>Mad Max: Fury Road</p>
+            <p>John Wick</p>
+            <p>The Dark Knight</p>
+        </div>
     </div>
 
-    <div class="kart">
-        <h2>DDOS Koruması</h2>
-        <p>
-            Güvenlik için Mikrotik ve Royale sistemleri kullanılmaktadır.
-            Bu sayede tamamen güvenli bir altyapı sağlanır.
-        </p>
+    <div class="card">
+        <input type="checkbox" id="macera">
+        <label for="macera">🗺️ Macera</label>
+        <div class="content">
+            <p>Interstellar</p>
+            <p>The Lord of the Rings</p>
+            <p>Pirates of the Caribbean</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <input type="checkbox" id="korku">
+        <label for="korku">👻 Korku</label>
+        <div class="content">
+            <p>The Conjuring</p>
+            <p>Insidious</p>
+            <p>Hereditary</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <input type="checkbox" id="komedi">
+        <label for="komedi">😂 Komedi</label>
+        <div class="content">
+            <p>The Hangover</p>
+            <p>Superbad</p>
+            <p>Deadpool</p>
+        </div>
     </div>
 
 </div>
