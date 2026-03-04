@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Craft Hosting Bilgilendirme</title>
 <style>
+:root {
+    --bg-color: #1e3c72;
+    --bg-color-light: #ffffff;
+    --text-color: #ffffff;
+    --text-color-light: #000000;
+    --primary: #4a90e2;
+}
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #ffffff;
+    background: var(--bg-color);
+    color: var(--text-color);
     overflow-x: hidden;
-    position: relative;
+    transition: background 0.5s, color 0.5s;
 }
-
 header {
     text-align: center;
     padding: 60px 20px;
@@ -21,93 +27,58 @@ header {
     position: relative;
     overflow: hidden;
 }
-
 header h1 {
     font-size: 3rem;
     margin: 0 0 10px 0;
     animation: fadeInDown 1s ease forwards;
-    position: relative;
-    z-index: 2;
 }
-
 header p {
     font-size: 1.3rem;
     color: #d0e6ff;
     animation: fadeInUp 1s ease 0.3s forwards;
     opacity: 0;
-    position: relative;
-    z-index: 2;
 }
-
-header::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 20%, transparent 20%) repeat;
-    background-size: 50px 50px;
-    animation: moveBackground 20s linear infinite;
-    z-index: 1;
-}
-
 main {
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
-    background-color: rgba(0, 50, 150, 0.85);
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
-
 section {
     margin-bottom: 30px;
     padding: 20px;
-    border-left: 5px solid #4a90e2;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     background: rgba(255,255,255,0.05);
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
     position: relative;
+    perspective: 1000px;
 }
-
-section::before {
-    content: '';
-    position: absolute;
-    left: -35px;
-    top: 20px;
-    font-size: 1.5rem;
-}
-
 section:hover {
-    transform: translateY(-5px);
+    transform: rotateY(3deg) translateY(-5px);
     box-shadow: 0 10px 25px rgba(74,144,226,0.6);
     background: rgba(255,255,255,0.1);
 }
-
 h2 {
     margin-top: 0;
-    color: #d0e6ff;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
 }
-
-h2::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 3px;
-    background: #4a90e2;
-    transition: width 0.3s;
+h2 .icon {
+    display: inline-block;
+    animation: bounce 2s infinite;
 }
-
-h2:hover::after {
-    width: 50%;
+h2:hover {
+    color: #ffffff;
 }
-
 p {
     line-height: 1.6;
+    transition: transform 0.3s;
 }
-
+p:hover {
+    transform: translateX(5px);
+}
 button {
     background: linear-gradient(45deg, #4a90e2, #2a5298);
     color: #ffffff;
@@ -115,85 +86,82 @@ button {
     padding: 12px 30px;
     border-radius: 25px;
     cursor: pointer;
-    transition: 0.3s;
     font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    position: relative;
     overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-
 button::before {
     content: "🚀";
     margin-right: 10px;
 }
-
 button:hover {
-    background: linear-gradient(45deg, #2a5298, #4a90e2);
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
-
-button:active {
-    transform: scale(0.95);
+button:active::after {
+    animation: ripple 0.6s linear;
 }
-
 button::after {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: -100%;
-    background: rgba(255,255,255,0.2);
-    transform: skewX(-20deg);
-    transition: left 0.5s;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.3);
+    display: block;
+    border-radius: 50%;
+    transform: scale(0);
+    pointer-events: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
 }
-
-button:hover::after {
-    left: 100%;
-}
-
 footer {
     text-align: center;
     padding: 20px;
-    color: #d0e6ff;
-    font-size: 0.9rem;
     border-top: 1px solid rgba(255,255,255,0.2);
 }
-
-.social-icons {
-    margin-top: 10px;
-}
-
 .social-icons a {
-    color: #d0e6ff;
     margin: 0 10px;
-    text-decoration: none;
     font-size: 1.3rem;
+    color: var(--text-color);
     transition: color 0.3s;
 }
-
 .social-icons a:hover {
-    color: #4a90e2;
+    color: var(--primary);
 }
-
-@keyframes fadeInDown {
-    0% {opacity: 0; transform: translateY(-20px);}
-    100% {opacity: 1; transform: translateY(0);}
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
-
-@keyframes fadeInUp {
-    0% {opacity: 0; transform: translateY(20px);}
-    100% {opacity: 1; transform: translateY(0);}
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    z-index: 1000;
 }
-
-@keyframes moveBackground {
-    0% {transform: translate(0,0);}
-    100% {transform: translate(50px,50px);}
-}
+@keyframes fadeInDown {0% {opacity:0; transform: translateY(-20px);}100%{opacity:1; transform:translateY(0);}}
+@keyframes fadeInUp {0% {opacity:0; transform: translateY(20px);}100%{opacity:1; transform:translateY(0);}}
+@keyframes bounce {0%,20%,50%,80%,100%{transform: translateY(0);}40%{transform: translateY(-8px);}60%{transform: translateY(-4px);}}
+@keyframes ripple {0%{transform: translate(-50%, -50%) scale(0);}50%{transform: translate(-50%, -50%) scale(2);}100%{transform: translate(-50%, -50%) scale(0);}}
 </style>
 </head>
 <body>
+
+<div id="particles"></div>
+<button id="darkModeToggle">🌙</button>
+
 <header>
     <h1>Craft Hosting Bilgilendirme</h1>
     <p>DDOS korumalı, güvenli ve hızlı</p>
@@ -201,17 +169,17 @@ footer {
 
 <main>
     <section>
-        <h2>Hızlı ve Güvenlik</h2>
+        <h2><span class="icon"></span> Hızlı ve Güvenlik</h2>
         <p>Sunucularımız en yüksek performanslıdır ve güvenlidir. 7/24 aktif DDOS koruması ile veri güvenliğiniz garanti altındadır.</p>
     </section>
 
     <section>
-        <h2>Kullanım Kolaylığı</h2>
+        <h2><span class="icon"></span> Kullanım Kolaylığı</h2>
         <p>Panelimiz basit, modern ve kullanıcı dostudur. Hosting işlemlerinizi tek tıkla yönetebilirsiniz.</p>
     </section>
 
     <section>
-        <h2>7/24 Destek</h2>
+        <h2><span class="icon"></span> 7/24 Destek</h2>
         <p>Uzman ekibimiz her zaman hizmetinizde. Sorularınızı anında yanıtlıyoruz.</p>
     </section>
 
@@ -223,10 +191,41 @@ footer {
 <footer>
     © 2026 Craft Hosting Bilgilendirme Sitesi
     <div class="social-icons">
-        <a href="#" target="_blank">🌐</a>
-        <a href="#" target="_blank">🐦</a>
-        <a href="#" target="_blank">📘</a>
+        <a href="#" target="_blank"></a>
+        <a href="#" target="_blank"></a>
+        <a href="#" target="_blank"></a>
     </div>
 </footer>
+
+<script>
+const toggle = document.getElementById('darkModeToggle');
+toggle.addEventListener('click', () => {
+    if(document.body.style.background === 'var(--bg-color-light)'){
+        document.body.style.background = 'var(--bg-color)';
+        document.body.style.color = 'var(--text-color)';
+    } else {
+        document.body.style.background = 'var(--bg-color-light)';
+        document.body.style.color = 'var(--text-color-light)';
+    }
+});
+
+const particlesContainer = document.getElementById('particles');
+for(let i=0;i<50;i++){
+    let particle = document.createElement('div');
+    particle.style.position='absolute';
+    particle.style.width='5px';
+    particle.style.height='5px';
+    particle.style.background='rgba(255,255,255,0.3)';
+    particle.style.borderRadius='50%';
+    particle.style.top=Math.random()*100+'%';
+    particle.style.left=Math.random()*100+'%';
+    particle.animate([
+        {transform:'translateY(0px)'},
+        {transform:'translateY(-100px)'}
+    ], {duration:5000+Math.random()*5000, iterations:Infinity});
+    particlesContainer.appendChild(particle);
+}
+</script>
+
 </body>
 </html>
