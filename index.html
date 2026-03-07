@@ -6,12 +6,12 @@
 <title>Craft Hosting Bilgilendirme</title>
 <style>
 :root {
-  --bg-dark: #1e3c72;
+  --bg-dark: #1e1e1e;
   --bg-light: #ffffff;
   --text-dark: #ffffff;
   --text-light: #000000;
-  --primary: #4a90e2;
-  --accent: #2a5298;
+  --primary: #ff8c00;
+  --accent: #ffa500;
 }
 body {
   margin:0;
@@ -47,7 +47,7 @@ header h1::after{
 }
 header p{
   font-size:1.3rem;
-  color: #d0e6ff;
+  color: #ffd9b3;
   animation:fadeInUp 1s ease 0.3s forwards;
   text-shadow: 0 0 5px rgba(255,255,255,0.4);
 }
@@ -67,7 +67,7 @@ section{
 }
 section:hover{
   transform: rotateY(6deg) translateY(-12px) scale(1.03);
-  box-shadow:0 15px 40px rgba(74,144,226,0.7);
+  box-shadow:0 15px 40px rgba(255,140,0,0.7);
   background: rgba(255,255,255,0.2);
 }
 h2{
@@ -109,7 +109,7 @@ button::before{
 }
 button:hover{
   transform: scale(1.1);
-  box-shadow:0 8px 25px rgba(0,0,0,0.4);
+  box-shadow:0 8px 25px rgba(255,140,0,0.4);
 }
 button:active::after{
   animation:ripple 0.6s linear;
@@ -168,7 +168,7 @@ footer{
   position:fixed;
   bottom:0;
   width:100%;
-  background: rgba(74,144,226,0.85);
+  background: rgba(255,140,0,0.85);
   color:#fff;
   overflow:hidden;
   white-space:nowrap;
@@ -240,8 +240,7 @@ for(let i=0;i<150;i++){
   p.style.position='absolute';
   p.style.width=size+'px';
   p.style.height=size+'px';
-  const colorChoices=['#4a90e2','#ffffff','#2a5298','#a0c4ff'];
-  p.style.background=colorChoices[Math.floor(Math.random()*colorChoices.length)];
+  p.style.background='#ff8c00';
   p.style.borderRadius='50%';
   p.style.top=Math.random()*100+'%';
   p.style.left=Math.random()*100+'%';
