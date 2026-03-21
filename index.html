@@ -2,242 +2,276 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CraftHosting - Minecraft</title>
-
+<title>DoğanSunucu</title>
 <style>
-body{
-margin:0;
-font-family:Segoe UI,Arial;
-background:#0b0f1a;
-color:white;
+body {
+  margin:0;
+  height:100vh;
+  background: linear-gradient(135deg, #003366, #cccccc);
+  font-family: 'Poppins', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 }
 
-
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:#060912;
-border-bottom:1px solid #1f2937;
+.container {
+  text-align: center;
+  background: rgba(0,0,0,0.85);
+  padding: 50px 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  width: 380px;
+  position: relative;
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
-color:#38bdf8;
+h1 { font-size: 36px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; }
+
+.link {
+  color: #00ccff;
+  text-decoration: underline;
+  cursor: pointer;
+  display: block;
+  margin: 15px 0;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.2s ease;
 }
 
-.info{
-font-size:14px;
-color:#94a3b8;
+.link:hover { transform: scale(1.05); }
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  width: 90%;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  outline: none;
+  font-size: 14px;
 }
 
-
-h1{
-text-align:center;
-margin-top:50px;
+button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 15px;
+  background: #00aaff;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.subtitle{
-text-align:center;
-color:#94a3b8;
-margin-bottom:40px;
+button:hover { background: #0088cc; transform: scale(1.05); }
+
+#registerForm, #loginForm, #panel { display: none; }
+
+#panel {
+  width: 420px;
+  color: #333;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: left;
+  position: relative;
 }
 
+#panel h1 { text-align: center; }
 
-.plans{
-display:grid;
-grid-template-columns:repeat(4, 1fr);
-gap:20px;
-padding:20px 40px 80px 40px;
+#progressContainer {
+  margin: 15px 0;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 25px;
+  position: relative;
 }
 
-.card{
-background:#111827;
-padding:18px;
-border-radius:12px;
-border:1px solid #1f2937;
-transition:0.3s;
-font-size:14px;
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #00aaff;
+  text-align: center;
+  line-height: 25px;
+  color: white;
+  font-weight: bold;
+  transition: width 0.2s linear;
 }
 
-.card:hover{
-transform:translateY(-8px);
-border-color:#38bdf8;
-box-shadow:0 0 15px #38bdf8;
+.info {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
+  display: none;
 }
 
-.card h3{
-margin:0 0 8px 0;
-color:#38bdf8;
-font-size:16px;
-}
-
-.details{
-color:#cbd5e1;
-line-height:1.5;
-margin:10px 0;
-font-size:13px;
-}
-
-.price{
-margin:8px 0;
-font-weight:bold;
-color:#22c55e;
-}
-
-.free{
-color:#facc15;
-}
+.info a { color: #00aaff; text-decoration: none; }
+.info a:hover { text-decoration: underline; }
 
 
-button{
-width:100%;
-padding:10px;
-margin-top:8px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-font-size:13px;
-font-weight:bold;
-background:#38bdf8;
-color:black;
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-button:hover{
-opacity:0.9;
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
 
-@media(max-width:1000px){
-.plans{
-grid-template-columns:repeat(2,1fr);
-}
-}
-
-@media(max-width:600px){
-.plans{
-grid-template-columns:repeat(1,1fr);
-}
-}
+#successMsg { color:green; text-align:center; font-weight:bold; display:none; margin-bottom:10px; }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="topbar">
-<div class="logo">CraftHosting</div>
-<div class="info">🛡 Korumalı | ⚡ Hızlı | 🚀 %99.9 Uptime</div>
+<div class="container" id="auth">
+  <h1 id="loginTitle">GİRİŞ YAP</h1>
+  
+  <div id="loginForm">
+    <input type="text" id="logUser" placeholder="Kullanıcı adı">
+    <input type="password" id="logPass" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+  </div>
+
+  <div class="link" id="toggleRegister" onclick="showRegister()">KAYIT OL</div>
+
+  <div id="registerForm">
+    <input type="text" id="regUser" placeholder="Kullanıcı adı">
+    <input type="password" id="regPass" placeholder="Şifre">
+    <button onclick="register()">Kayıt Ol</button>
+    <div class="link" onclick="showLogin()">GİRİŞ YAP</div>
+  </div>
 </div>
 
-<h1>CraftHosting Server Planları</h1>
-<p class="subtitle">Bedava ve Hızlı Sunucular</p>
+<div id="panel" class="container">
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </div>
+  <h1>Bilgilendirme</h1>
+  <p id="successMsg">Başarıyla giriş yapıldı!</p>
+  <p>Hoş geldin, <span id="username"></span>!</p>
+  <p>Makina Gücü Yükleniyor:</p>
+  <div id="progressContainer">
+    <div id="progressBar">0%</div>
+  </div>
+  <button id="startBtn" onclick="startServer()" disabled>Başla</button>
 
-<div class="plans">
-
-
-<div class="card">
-<h3> 2GB</h3>
-<div class="details">
-2 GB RAM<br>
-2 vCPU<br>
-10 GB Disk 💾
-</div>
-<div class="price free">Bedava</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>4GB</h3>
-<div class="details">
-4 GB RAM<br>
-4 vCPU<br>
-20 GB Disk 💾
-</div>
-<div class="price">$2 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>6GB</h3>
-<div class="details">
-6 GB RAM<br>
-4 vCPU<br>
-20 GB Disk 💾
-</div>
-<div class="price">$4 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>8GB</h3>
-<div class="details">
-8 GB RAM<br>
-4 vCPU<br>
-30 GB Disk 💾
-</div>
-<div class="price">$6 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>10GB</h3>
-<div class="details">
-10 GB RAM<br>
-4 vCPU<br>
-30 GB Disk 💾
-</div>
-<div class="price">$8 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>12GB</h3>
-<div class="details">
-12 GB RAM<br>
-4 vCPU<br>
-30 GB Disk 💾
-</div>
-<div class="price">$10 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>14GB</h3>
-<div class="details">
-14 GB RAM<br>
-4 vCPU<br>
-40 GB Disk 💾
-</div>
-<div class="price">$12 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
-
-<div class="card">
-<h3>16GB</h3>
-<div class="details">
-16 GB RAM<br>
-4 vCPU<br>
-40 GB Disk 💾
-</div>
-<div class="price">$14 / ay</div>
-<button onclick="order()">Sipariş Ver</button>
-</div>
-
+  <div class="info" id="menuInfo">
+    <h2>Alaca Sunucum 🗄️</h2>
+    <p><strong>Minecraft sunucuları için tamamen ücretsiz yeni nesil hosting! 🚀</strong></p>
+    <p>💯 <strong>%100 Ücretsiz Minecraft Sunucusu</strong> - Hiçbir ücret yok, direkt başla!</p>
+    <p>🎁 <strong>Davet Et, Kredi Kazan</strong> - Her davet = 1 kredi</p>
+    <p>🖥️ <strong>Krediyle Sunucu Aç</strong> - Davet yap, kredi topla, sunucunu kur!</p>
+    <p>
+    <p>
+    <p>
+    <p>
+  </div>
 </div>
 
 <script>
-function order(){
-window.location.href="https://client.crafthosting.com.tr/market/1/view";
+function showRegister(){
+  document.getElementById("registerForm").style.display="block";
+  document.getElementById("loginForm").style.display="none";
+  document.getElementById("toggleRegister").style.display="none";
+  document.getElementById("loginTitle").textContent="KAYIT OL";
+  document.getElementById("successMsg").style.display="none";
+}
+
+function showLogin(){
+  document.getElementById("registerForm").style.display="none";
+  document.getElementById("loginForm").style.display="block";
+  document.getElementById("toggleRegister").style.display="block";
+  document.getElementById("loginTitle").textContent="GİRİŞ YAP";
+  document.getElementById("successMsg").style.display="none";
+}
+
+function register(){
+  let user=document.getElementById("regUser").value;
+  let pass=document.getElementById("regPass").value;
+  if(!user||!pass){ alert("Boş bırakma!"); return; }
+  if(localStorage.getItem(user)){ alert("Bu kullanıcı zaten var!"); return; }
+  localStorage.setItem(user,pass);
+  showPanel(user);
+  document.getElementById("successMsg").textContent="Başarıyla kayıt olundu ve giriş yapıldı!";
+  document.getElementById("successMsg").style.display="block";
+  loadMachinePower();
+}
+
+function login(){
+  let user=document.getElementById("logUser").value;
+  let pass=document.getElementById("logPass").value;
+  let savedPass=localStorage.getItem(user);
+  if(savedPass===pass){
+    localStorage.setItem("loggedIn",user);
+    showPanel(user);
+    document.getElementById("successMsg").textContent="Başarıyla giriş yapıldı!";
+    document.getElementById("successMsg").style.display="block";
+    loadMachinePower();
+  } else { alert("Hatalı giriş!"); }
+}
+
+function showPanel(user){
+  document.getElementById("auth").style.display="none";
+  document.getElementById("panel").style.display="block";
+  document.getElementById("username").textContent=user;
+}
+
+function loadMachinePower(){
+  const progressBar=document.getElementById("progressBar");
+  const startBtn=document.getElementById("startBtn");
+  let width=0;
+  startBtn.disabled=true;
+  const interval=setInterval(()=>{
+    if(width>=100){
+      clearInterval(interval);
+      progressBar.style.width="100%";
+      progressBar.textContent="100%";
+      startBtn.disabled=false;
+    } else {
+      width+=Math.floor(Math.random()*5)+1;
+      if(width>100) width=100;
+      progressBar.style.width=width+"%";
+      progressBar.textContent=width+"%";
+    }
+  },300);
+}
+
+function startServer(){ window.location.href="https://discord.gg/alacahost"; }
+
+function toggleMenu(el){
+  el.classList.toggle("active");
+  const info=document.getElementById("menuInfo");
+  if(info.style.display==="block") info.style.display="none";
+  else info.style.display="block";
+}
+
+window.onload=function(){
+  let user=localStorage.getItem("loggedIn");
+  if(user){ 
+    showPanel(user); 
+    document.getElementById("successMsg").textContent="Başarıyla giriş yapıldı!";
+    document.getElementById("successMsg").style.display="block";
+    loadMachinePower(); 
+  } else showLogin();
 }
 </script>
 
